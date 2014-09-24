@@ -1,0 +1,36 @@
+<template name="tutorials">
+    <div class="container">
+    <h1>Tutorials</h1>
+        {{#if tutorials.count}}
+            {{#each tutorials}}
+                {{#with tutorialModel}}
+                    <div class="row tutorialLine">
+                        {{name}} <span class="badge">{{currentCapacity}} / {{capacity}}</span>
+
+                        {{#if isInRole 'admin'}}
+                            {{#if canDelete}}
+                                <button class="btn btn-danger pull-right removeTutorial"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                            {{/if}}
+                            <a class="btn btn-info pull-right modifyTutorial" href="{{pathFor 'modifyTutorial'}}"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        {{/if}}
+
+                        {{#if canRegister}}
+                            <button class="btn btn-primary pull-right registerForTutorial"><span class="glyphicon glyphicon-adjust"></span> Register</button>
+                        {{/if}}
+                        {{#if isRegistered}}
+                            <button class="btn btn-default pull-right deregisterForTutorial"><span class="glyphicon glyphicon-collapse-down"></span> Cancel Registration</button>
+                        {{/if}}
+
+                    </div>
+                {{/with}}
+            {{/each}}
+        {{else}}
+        <p class="well bg-warning" id="noTutorialsWarning">There are no tutorials available ...</p>
+        {{/if}}
+
+        {{#if isInRole 'admin'}}
+            <hr />
+            <a href="{{pathFor 'createTutorial'}}" class="btn btn-primary" id="createTutorial">Create Tutorial</a>
+        {{/if}}
+    </div>
+</template>

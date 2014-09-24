@@ -1,0 +1,13 @@
+<template name="admin">
+    <form role="form">
+        <div class="form-group">
+            <label for="tutorialName">Name</label>
+            <input type="text" class="form-control" id="tutorialName" placeholder="Name of the Tutorial" value="{{name}}">
+        </div>
+        <div class="form-group">
+            <label for="tutorialCapacity">Capacity</label>
+            <input type="number" class="form-control" id="tutorialCapacity" placeholder="Maximum Number of People in Tutorial" value="{{capacity}}">
+        </div>
+        <button type="submit" class="btn btn-default" id="modifyTutorialButton">Submit</button>
+    </form>
+</template>
