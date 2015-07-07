@@ -97,36 +97,43 @@ it("should show create, modify and delete button to admin user", function () {
     // functions
 
     it("function canDelete should return true only when tutorial has no registrations", function () {
-        expect(Template.tutorials.canDelete.call({currentCapacity: 0})).toBeTruthy();
+    /*    expect(Template.tutorials.canDelete.call({currentCapacity: 0})).toBeTruthy();*/
+        expect(Template.tutorials.__helpers[' canDelete'].apply({currentCapacity:0})).toBeTruthy();
+
+
     });
 
     it("function canDelete should return false when there are registrations", function () {
-        expect(Template.tutorials.canDelete.call({currentCapacity: 1})).toBeFalsy();
-    });
+       /* expect(Template.tutorials.canDelete.call({currentCapacity: 1})).toBeFalsy();*/
+        expect(Template.tutorials.__helpers[' canDelete'].apply({currentCapacity:1})).toBeFalsy(); });
 
     it("function canRegister should return true when capacity is available and student is not yet registered", function () {
         // stub values called with accessor "this.currentCapacity"
         spyOn(TutorialRegistrations, "find").and.returnValue({count: function() { return 0; }});
-        expect(Template.tutorials.canRegister.call({currentCapacity: 1, capacity: 2})).toBeTruthy();
+      /*  expect(Template.tutorials.canRegister.call({currentCapacity: 1, capacity: 2})).toBeTruthy();*/
+        expect(Template.tutorials.__helpers[' canRegister'].apply({currentCapacity: 1, capacity: 2})).toBeTruthy();
     });
 
     it("function canRegister should return false when reached capacity is available and student is not yet registered", function () {
-        expect(Template.tutorials.canRegister.call({currentCapacity: 2, capacity: 2})).toBeFalsy();
-
+       /* expect(Template.tutorials.canRegister.call({currentCapacity: 2, capacity: 2})).toBeFalsy();*/
+        expect(Template.tutorials.__helpers[' canRegister'].apply({currentCapacity: 2, capacity: 2})).toBeFalsy();
         spyOn(TutorialRegistrations, "find").and.returnValue({count: function() { return 1; }});
-        expect(Template.tutorials.canRegister.call({currentCapacity: 1, capacity: 2})).toBeFalsy();
+       /* expect(Template.tutorials.canRegister.call({currentCapacity: 1, capacity: 2})).toBeFalsy();*/
+        expect(Template.tutorials.__helpers[' canRegister'].apply({currentCapacity: 1, capacity: 2})).toBeFalsy();
     });
 
     it("function isRegistered should return true when student is registered for the current class", function () {
         // stub values called with accessor "this.currentCapacity"
         spyOn(TutorialRegistrations, "find").and.returnValue({count: function() { return 1; }});
-        expect(Template.tutorials.isRegistered()).toBeTruthy();
+      /*  expect(Template.tutorials.isRegistered()).toBeTruthy();*/
+        expect(Template.tutorials.__helpers[' isRegistered']()).toBeTruthy();
     });
 
     it("function isRegistered should return false when student is not registered for the current class", function () {
         // stub values called with accessor "this.currentCapacity"
         spyOn(TutorialRegistrations, "find").and.returnValue({count: function() { return 0; }});
-        expect(Template.tutorials.isRegistered()).toBeFalsy();
+       /* expect(Template.tutorials.isRegistered()).toBeFalsy();*/
+        expect(Template.tutorials.__helpers[' isRegistered']()).toBeFalsy();
     });
 
     it("should be able to register for tutorial by clicking on the '.registerForTutorial' button", function () {
